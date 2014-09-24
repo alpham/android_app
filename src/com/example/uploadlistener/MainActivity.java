@@ -4,6 +4,7 @@ import com.example.uploadlistener.services.CustomSocketIOService;
 import com.example.uploadlistener.tasks.LoginTask;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,19 +19,23 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	public EditText usernameEditText;
 	public EditText passwordEditText;
 	public Button login;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (CustomSocketIOService.id != 0) {
+			startActivity(new Intent(this, DisplayActivity.class));
+			finish();
+		}
+
 		setContentView(R.layout.activity_main);
-		
+
 		usernameEditText = (EditText) findViewById(R.id.usernameTextView);
 		passwordEditText = (EditText) findViewById(R.id.passwordTextView);
 		login = (Button) findViewById(R.id.loginButton);
-		
+
 		login.setOnClickListener(this);
-		
-		
+
 		CustomSocketIOService.numMessages = 1;
 
 	}
@@ -74,7 +79,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	public void onClick(View v) {
 		String username = this.usernameEditText.getText().toString();
 		String password = this.passwordEditText.getText().toString();
-		
+
 		LoginTask loginTask = new LoginTask(username, password, this);
 		loginTask.execute();
 
@@ -85,9 +90,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		this.usernameEditText.setHint("Username");
 		this.passwordEditText.setText("");
 		this.passwordEditText.setHint("Password");
-		
-		Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show();
-		
+
+		Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG)
+				.show();
+
 	}
 
 }

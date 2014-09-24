@@ -79,8 +79,8 @@ public class LoginTask extends AsyncTask<String, Integer, Bundle> {
 	protected void onPreExecute() {
 		super.onPreExecute();
 		
-		loadingDialog = ProgressDialog.show(this.mainActivity, "dialog title",
-			    "dialog message", true);
+		loadingDialog = ProgressDialog.show(this.mainActivity, "Loading...",
+			    "Please, wait...", true);
 		
 	}
 
