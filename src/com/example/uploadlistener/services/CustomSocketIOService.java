@@ -45,7 +45,7 @@ public class CustomSocketIOService extends Service implements IOCallback {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		list = new ArrayList<String>();
 		try {
-			socket = new SocketIO("http://192.168.56.1:5000/"/*"http://still-reaches-1894.herokuapp.com/"*/); // just for testing..
+			socket = new SocketIO(/*"http://192.168.56.1:5000/"*/"http://still-reaches-1894.herokuapp.com/"); // just for testing..
 			socket.connect(this);
 			// introducing the doctor to the server 
 			
